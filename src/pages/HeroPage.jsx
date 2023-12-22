@@ -1,21 +1,36 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import "@splidejs/react-splide/css";
 import Header from "../components/Header";
 import Transition from "../components/transition";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import helicopter from "../assets/helicopter.svg";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const HeroPage = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const splideRef = useRef(null);
+
+  useEffect(() => {
+    const startAutoScroll = setTimeout(() => {
+      if (splideRef.current) {
+        splideRef.current.splide.go("+1");
+        splideRef.current.splide.autoplay.start();
+      }
+    }, 3000);
+
+    return () => clearTimeout(startAutoScroll);
+  }, []);
 
   return (
     <Box>
       <Header>
-        <Box
-          sx={{
+        <motion.div
+          style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -23,6 +38,7 @@ const HeroPage = () => {
             height: "82vh",
           }}
           onClick={() => setIsVisible(!isVisible)}
+          layout
         >
           <Box
             sx={{
@@ -34,7 +50,7 @@ const HeroPage = () => {
               flexDirection: "column",
             }}
           >
-            <Box sx={{ marginTop: "5em" }}>
+            <motion.div sx={{ marginTop: "5em" }}>
               <Typography
                 variant="h3"
                 sx={{
@@ -63,52 +79,69 @@ const HeroPage = () => {
                 our naval forces continue to uphold the highest standards of
                 professionalism and excellence."
               </Typography>
-            </Box>
-            {isVisible && (
-              <Box sx={{ marginTop: "2em" }}>
-                <Splide
-                  options={{
-                    type: "loop",
-                    arrows: false,
-                    pagination: false,
-                    direction: "ltr",
-                    perPage: 2,
-                    gap: "2em",
-                    autoScroll: {
-                      pauseOnHover: true,
-                      rewind: false,
-                      speed: 1,
-                      autoStart: true,
-                    },
-                  }}
-                  extensions={{ AutoScroll }}
+            </motion.div>
+            <AnimatePresence>
+              {isVisible && (
+                <motion.div
+                  style={{ marginTop: "2em" }}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  transition={{ duration: 1, ease: "backInOut" }}
                 >
-                  <SplideSlide>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        backgroundColor: "transparent",
-                        justifyContent: "space-around",
-                      }}
-                    >
-                      <img
+                  <Splide
+                    ref={splideRef}
+                    options={{
+                      type: "loop",
+                      arrows: false,
+                      pagination: false,
+                      direction: "ltr",
+                      perPage: 2,
+                      gap: "2em",
+                      autoScroll: {
+                        pauseOnHover: true,
+                        rewind: false,
+                        speed: 1,
+                      },
+                    }}
+                    extensions={{ AutoScroll }}
+                  >
+                    <SplideSlide>
+                      <motion.div
                         style={{
-                          maxWidth: "100%",
-                          height: "auto",
-                          marginLeft: "1em",
-
-                          width: "70%",
+                          display: "flex",
+                          backgroundColor: "transparent",
+                          justifyContent: "space-around",
                         }}
-                        src={helicopter}
-                        alt=""
-                      />
-                    </Box>
-                  </SplideSlide>
-                </Splide>
-              </Box>
-            )}
+                      >
+                        <Link
+                          to="/achievements"
+                          style={{
+                            border: "1px solid red",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <img
+                            style={{
+                              height: "20em",
+                              marginLeft: "1em",
+
+                              width: "100%",
+                            }}
+                            src={helicopter}
+                            alt=""
+                          />
+                        </Link>
+                      </motion.div>
+                    </SplideSlide>
+                  </Splide>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </Box>
-        </Box>
+        </motion.div>
       </Header>
     </Box>
   );
