@@ -14,7 +14,7 @@ const HeroPage = () => {
   return (
     <Box>
       <Header>
-        <Button sx={{ cursor: "auto" }}>
+        <Button disableRipple sx={{ cursor: "auto" }}>
           <Box
             sx={{
               display: "flex",
