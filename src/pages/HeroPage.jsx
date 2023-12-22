@@ -117,7 +117,6 @@ const HeroPage = () => {
                         <Link
                           to="/achievements"
                           style={{
-                            border: "1px solid red",
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
