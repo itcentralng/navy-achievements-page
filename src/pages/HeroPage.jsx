@@ -114,25 +114,28 @@ const HeroPage = () => {
                           justifyContent: "space-around",
                         }}
                       >
-                        <Link
-                          to="/achievements"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <img
+                        <Box sx={{ border: "1px solid red" }}>
+                          <Link
+                            to="/achievements"
                             style={{
-                              height: "20em",
-                              marginLeft: "1em",
-
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
                               width: "100%",
                             }}
-                            src={helicopter}
-                            alt=""
-                          />
-                        </Link>
+                          >
+                            <img
+                              style={{
+                                height: "20em",
+                                marginLeft: "1em",
+
+                                width: "100%",
+                              }}
+                              src={helicopter}
+                              alt=""
+                            />
+                          </Link>
+                        </Box>
                       </motion.div>
                     </SplideSlide>
                   </Splide>
