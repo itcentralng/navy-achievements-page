@@ -14,54 +14,57 @@ const HeroPage = () => {
   return (
     <Box>
       <Header>
-        <Button disableRipple sx={{ cursor: "auto" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            height: "82vh",
+          }}
+          onClick={() => setIsVisible(!isVisible)}
+        >
           <Box
             sx={{
+              height: "100%",
+              width: "93%",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
-              height: "82vh",
             }}
           >
-            <Box
-              sx={{
-                height: "100%",
-                width: "93%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
-              <Box sx={{ marginTop: "5em" }}>
-                <Typography
-                  variant="h3"
-                  sx={{
-                    fontSize: "2.7rem",
-                    color: "#D1C62A",
-                    textAlign: "center",
-                    fontWeight: 300,
-                    textTransform: "uppercase",
-                  }}
-                >
-                  THe achievements of the nigerian navy commands
-                </Typography>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    color: "#fff",
-                    fontSize: "1.4rem",
-                    textAlign: "center",
-                    textTransform: "capitalize",
-                    marginTop: "1.2em",
-                  }}
-                >
-                  “From successful maritime operations to humanitarian missions,
-                  our naval forces continue to uphold the highest standards of
-                  professionalism and excellence."
-                </Typography>
-              </Box>
+            <Box sx={{ marginTop: "5em" }}>
+              <Typography
+                variant="h3"
+                sx={{
+                  fontSize: "2.7rem",
+                  color: "#D1C62A",
+                  textAlign: "center",
+                  fontWeight: 300,
+                  textTransform: "uppercase",
+                  cursor: "text",
+                }}
+              >
+                THe achievements of the nigerian navy commands
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.4rem",
+                  textAlign: "center",
+                  textTransform: "capitalize",
+                  marginTop: "1.2em",
+                  cursor: "text",
+                }}
+              >
+                “From successful maritime operations to humanitarian missions,
+                our naval forces continue to uphold the highest standards of
+                professionalism and excellence."
+              </Typography>
+            </Box>
+            {isVisible && (
               <Box sx={{ marginTop: "2em" }}>
                 <Splide
                   options={{
@@ -103,9 +106,9 @@ const HeroPage = () => {
                   </SplideSlide>
                 </Splide>
               </Box>
-            </Box>
+            )}
           </Box>
-        </Button>
+        </Box>
       </Header>
     </Box>
   );
